@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue JS Method & Event</title>
+    <script src="https://unpkg.com/vue@3"></script>
+</head>
+<body>
+    <header>
+        <h2>Vue JS - Method and Event</h2>
+    </header>
+
+    <div id="app">
+        <h5>Time: {{ getCurrentTime() }}</h5>
+        <div>
+            <h4>Counter: {{count}}</h4> 
+            <!-- <button v-on:click="decrease()">Decrement</button>
+            <button v-on:click="increase()">Increment</button> -->
+
+            <button @click="decrease()">Decrement</button>
+            <button @click="increase()">Increment</button>
+            <br />
+            <button @click="decreaseNum(2)">Decrement 2</button>
+            <button @click="increaseNum(2)">Increment 2</button>
+            <br />
+            <button @click="decreaseNum(3)">Decrement 3</button>
+            <button @click="increaseNum(3)">Increment 3</button>
+            <br>
+            <hr>
+            <button @click="test($event)">Test</button>
+            <!-- <button @click="test">Test</button> its also possible-->
+
+        </div>
+    </div>
+
+    <script>
+        const app = Vue.createApp({
+            data: function() {
+                return {
+                   count: 0,
+                };
+            },
+            methods: {
+                getCurrentTime()
+                {
+                    let ct = new Date();
+                    return ct;
+                },
+                decrease()
+                {
+                    if(this.count > 0)
+                    {
+                        this.count -= 1;
+                    }                  
+                },
+                increase()
+                {
+                    this.count += 1;
+                },
+                decreaseNum(number)
+                {
+                    if(this.count >= number)
+                    {
+                        this.count -= number;
+                    }
+                },
+                increaseNum(number)
+                {
+                    this.count += number;
+                },
+                test(event)
+                {
+                    console.log("Test");
+                    console.log(event);
+                }
+            },
+        });
+
+        app.mount("#app");
+    </script>
+</body>
+</html>

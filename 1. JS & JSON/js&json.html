@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue JS 3 Tut</title>
+  </head>
+  <body>
+    <script>
+      console.log(window);
+
+      alert(window.innerWidth);
+    
+      function start()
+      {
+        console.log("Start");
+      }
+
+      function process()
+      {
+        setTimeout(function() { 
+            console.log("Process");
+        }, 1000); //this function will run after 1 second
+        // console.log("Process");
+      }
+
+      function processing(callback) //with callback function
+      {
+        setTimeout(function() {
+            console.log("Processing");
+            callback();
+        }, 2000);
+      }
+
+      function end()
+      {
+        console.log("End");
+      }
+
+      start();
+      process(); // this process will run after 1 second
+      end();
+
+      start();
+      processing(function() { //but this processing will run after 2 second and then the end run 
+        end();
+      });
+
+      var myJson = {
+        name: "Sujoy Saha",
+        email: "sahasujoy.cse@gmail.com",
+        skills: ["JS", "PHP", "Laravel"],
+        friends: [
+          {
+            name: "Forhad",
+            email: "forhad@gmail.com"
+          },
+          {
+            name: "Sourav",
+            email: "sourav@gmail.com"
+          },
+          {
+            name: "Ashik",
+            email: "ashik@gmail.com"
+          }
+        ]
+      }
+
+      console.log(myJson);
+      console.log(myJson.skills);
+      console.log(myJson.friends[0].email);
+      console.log(myJson.email);
+      console.log(myJson.friends[1].name);
+    </script>
+  </body>
+</html>

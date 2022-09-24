@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Binding</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="https://unpkg.com/vue@3"></script>
+</head>
+<body>
+    <header><h3>Vue JS - Data Binding</h3></header>
+
+    <div id="app">
+        <h4>Enter a Number</h4>
+        <!-- <input :value="num" type="text" @input="handleInput"> -->
+        <!-- Two way Binding - v-model works for this two binding in one way -->
+        <input v-model.number="num" type="text">
+        <!-- THIS MODIFIER MAKE ADD TEN RIGHT OTHERWISE IT WILL GIVE A STRING ADD RESULT -->
+        <br>
+        <br>
+        <button @click="getDouble">Get Double</button>
+        <button @click="getSquare">Get Square</button>
+        <button @click="getCube">Get Cube</button>
+        <button @click="addTen">Add Ten</button>
+        <button @click="reset">Reset</button>
+        <hr>
+
+        <label for="">Entered Number: {{ num }}</label>
+        <br>
+        <label for="">Result: {{ result }}</label>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

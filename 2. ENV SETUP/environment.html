@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue JS Environment</title>
+    <script src="https://unpkg.com/vue@3"></script>
+</head>
+<body>
+    <header>
+        <h2>Vue JS Environment Setup</h2>
+    </header>
+
+    <div id="app">
+        <div>
+            {{ msg }}
+        </div>
+        <div> 
+            <p>            Name: {{ myJson.name }}            </p>
+            <p>            Email: {{ myJson.email }}            </p>
+            <!-- <p>            Github: <a href="{{ myJson.githubLink }}">Go to Github Profile</a> </p> --> 
+            <p>            Github: <a v-bind:href="myJson.githubLink">Go to Github Profile</a> </p> 
+            <!-- <p>            Github: <a :href="myJson.githubLink">Go to Github Profile</a> </p>  It can also be used -->
+            <p v-html="htmlCode"></p> 
+            <!-- {{htmlCode}} it shows the html code-->
+        </div>
+        <div>
+            {{ alert }}
+        </div>       
+    </div>
+
+    <script>
+        const app = Vue.createApp({
+            data: function() {
+                return {
+                    msg: "Welcome to VUE-JS-3 Environment Setup!",
+                    alert: "Thank You",
+                    myJson: {
+                        name: "Sujoy Saha",
+                        email: "sahasujoy.cse@gmail.com",
+                        githubLink: "https://www.github.com/sahasujoy", //attribute binding
+                    },
+                    htmlCode: '<a href="https:/www.facebook.com/sujoy.tapu">Go to Facebook Profile</a>', //data binding
+                };
+            }
+        });
+
+        app.mount("#app");
+    </script>
+</body>
+</html>
