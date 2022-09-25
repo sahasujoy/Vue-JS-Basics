@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conditional Rendering</title>
+    <link rel="stylesheet" href="conditional.css">
+    <script src="https://unpkg.com/vue@3"></script>
+</head>
+<body>
+    <header><h1>Vue JS - Conditional Rendering</h1></header>
+
+    <div id="app">
+        <button @click="toggle">Show/Hide</button>
+        <br><br>
+        <hr>
+        <!-- <div class="card" v-if="show"> -->
+        <div class="card" v-show="show">
+            <h5>Sujoy Saha</h5>
+            <h6>sahasujoy.cse@gmail.com</h6>
+        </div>
+
+        <br> <br> 
+        <hr>
+        <br>
+
+        <div>
+            <table>
+                <tr>
+                    <th>Skill Name</th>
+                    <th>Experience</th>
+                </tr>
+                <tr v-for="skill in skills" :key="skill.name">
+                    <td>{{ skill.name }}</td>
+                    <td>
+                        <span v-if="skill.exp < 5">Beginner</span>
+                        <span v-else-if="skill.exp < 7">Proficient</span>
+                        <span v-else>Expert</span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <script>
+            const app = Vue.createApp({
+                data() {
+                    return {
+                        show: false,
+                        skills: [
+                            {name: "html", exp: 7},
+                            {name: "css", exp: 7},
+                            {name: "php", exp: 6},
+                            {name: "laravel", exp: 5},
+                            {name: "js", exp: 7},
+                            {name: "vue", exp: 2},
+                            {name: "api dev", exp: 5},
+                            {name: "bootstrap", exp: 6},
+                        ]
+                    }
+                },
+
+                methods: {
+                    toggle()
+                    {
+                        this.show = !this.show;
+                    }
+                },
+            });
+
+            app.mount("#app");
+        </script>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computed Properties & Watcher</title>
+    <script src="https://unpkg.com/vue@3"></script>
+</head>
+<body>
+    <header><h2>Vue.JS - Computed Properties & Watcher</h2></header>
+
+    <div id="app">
+        <input type="text" v-model="review" placeholder="Type your review">
+        <table>
+            <tr>
+                <th>Skill Title</th>
+                <th>Experience</th>
+            </tr>
+            <tr v-for="(skill, i) in skills" @click="removeSkill(i)">
+                <td>{{ skill.name }}</td>
+                <td>{{ skill.exp }}</td>
+            </tr>
+        </table>
+        <h3> Total Count From Methods Property: {{ totalSkills() }} </h3>
+        <h3> Total Count From Computed Property: {{ totalSkillCount }} </h3>
+        <br><br>
+        <h2>Experienced Skills:</h2>
+        <p v-for="(skill, index) in experiencedSkill">{{ index+1 }}. {{ skill.name }} - {{ skill.exp }}</p>
+        <br>
+        <hr>
+        <h3>Watcher</h3>
+        <input type="text" placeholder="Enter a 9 digit number" v-model="number">
+        <br><br>
+        <input type="text" placeholder="Enter First Name" v-model="name.firstName">
+        <input type="text" placeholder="Enter Last Name" v-model="name.lastName">
+    </div>
+
+    <footer><h3>Thank You</h3></footer>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    skills: [
+                            {name: "html", exp: 7},
+                            {name: "css", exp: 7},
+                            {name: "php", exp: 6},
+                            {name: "laravel", exp: 5},
+                            {name: "js", exp: 7},
+                            {name: "vue", exp: 2},
+                            {name: "api dev", exp: 5},
+                            {name: "bootstrap", exp: 6},
+                        ],
+                    review: "",
+                    number: "",
+                    name: {
+                        firstName: "",
+                        lastName: "",
+                    },
+                    firstName: "",
+                    lastName: "",
+                    fullName: "",
+                }
+            },
+
+            //this computed property works like data property. it is called by only name. It will not be run when review is typed
+            //parameter is not be used here
+            computed: {
+                totalSkillCount()
+                {
+                    console.log("Count Skill From Computed Property");
+                    return this.skills.length;
+                }, 
+                experiencedSkill()
+                {
+                    let expSkills = this.skills.filter((item) => {
+                        return item.exp > 5;
+                    });
+
+                    return expSkills;
+                }
+            },
+
+            watch: {
+                number(newNumber, oldNumber)
+                {
+                    console.log(newNumber);
+                    console.log(oldNumber);
+                    if(isNaN(newNumber))
+                    {
+                        alert("Not a Number! Please Type a Valid Number!");
+                        this.number = oldNumber;
+                    }
+                    if(newNumber.length == 9)
+                    {
+                        alert("You have entered a 9 digit number");
+                    }
+                },
+
+                // "name.firstName": (newValue, oldValue) => {
+                //     console.log(newValue, oldValue);            
+                // },
+
+                //we can watch an object by this
+                name: {
+                    deep: true,
+                    handler: (newValue) => {
+                        console.log(newValue);    
+                    }
+                }
+            },
+
+            methods: {
+                removeSkill(i) 
+                {
+                    this.skills.splice(i, 1);
+                },
+
+                totalSkills()
+                {
+                    // it will be run when review input is typed. it increase run time. thats why computed property has been arise. 
+                    console.log("Count Skill");
+                    return this.skills.length;
+                }
+            },
+        });
+
+        app.mount("#app");
+    </script>
+</body>
+</html>

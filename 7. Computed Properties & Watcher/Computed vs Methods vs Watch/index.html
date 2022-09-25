@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computed Properties vs Methods vs Watch</title>
+    <script src="https://unpkg.com/vue@3"></script>
+</head>
+<body>
+    <header><h2>Vue JS - Computed Properties vs Methods vs Watch</h2></header>
+
+    <div id="app">
+        <input type="text" placeholder="First Name" v-model="firstName">
+        <input type="text" placeholder="Last Name" v-model="lastName">
+        <div>
+            <h3> Full Name: {{ fullname }}</h3>
+        </div>
+    </div>
+
+    <footer><h4>Thank You</h4></footer>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    firstName: "",
+                    lastName: "",
+                    fullname: "",
+                }
+            },
+
+            computed: {
+                // fullname()
+                // {
+                //     return this.firstName+ " " +this.lastName;
+                // }
+            },
+
+            methods: {
+                // fullname()
+                // {
+                //     return this.firstName+ " " +this.lastName;
+                // }
+            },
+
+            watch: {
+                firstName(newValue)
+                {
+                    this.fullname = newValue+ " " +this.lastName;
+                },
+
+                lastName(newValue)
+                {
+                    this.fullname = this.firstName+ " " +this.lastName;
+                }
+            }
+        });
+    
+        //these three work same. but their ways are different!
+
+        app.mount("#app");
+    </script>
+</body>
+</html>
